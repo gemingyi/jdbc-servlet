@@ -91,4 +91,11 @@ public class ProjectDAOImpl implements IProjectDAO{
 		return 0;
 	}
 
+	@Override
+	public ResultSet export() throws Exception {
+		String sql = "SELECT id,name,frName,tel,address FROM project";
+		this.pstmt = this.conn.prepareStatement(sql);
+		return this.pstmt.executeQuery();
+	}
+
 }

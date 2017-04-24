@@ -1,5 +1,6 @@
 package com.gmy.dao;
 
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,4 +17,6 @@ public interface IProjectDAO {
 	public List<Project> findAll(Integer currentPage,Integer lineSize) throws Exception;
 	
 	public Integer getAllCount() throws Exception;
+	
+	public ResultSet export() throws Exception;
 }

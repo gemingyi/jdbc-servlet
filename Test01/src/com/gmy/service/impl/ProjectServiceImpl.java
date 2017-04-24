@@ -1,7 +1,7 @@
 package com.gmy.service.impl;
 
+import java.sql.ResultSet;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -59,5 +59,10 @@ public class ProjectServiceImpl implements IProjectService{
 		} finally {
 			this.dbc.close();
 		}
+	}
+
+	@Override
+	public ResultSet exportExcel() throws Exception {
+		return DAOFactory.getIProjectDAOInstance(this.dbc.getConnection()).export();
 	}
 }

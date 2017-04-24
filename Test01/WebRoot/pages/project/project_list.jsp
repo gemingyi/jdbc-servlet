@@ -1,9 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+	+ path + "/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -21,18 +20,24 @@
 
 <script type="text/javascript" src="js/page.js"></script>
 <script type="text/javascript" src="js/project_list.js"></script>
-
+<script type="text/javascript">
+	function export1() {
+		alert(1)
+		window.open('pages/project/ProjectServlet/exportExcel');
+	}
+</script>
 <!-- Bootstrap所需要的一些基础样式 -->
-<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="bootstrap/css/bootstrap.min.css">
 </head>
 
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-md12">
+			<div class="col-md-9 col-md-offset-1">
 				<!-- 定义导航条 -->
 				<div class="panel panel-success">
-					<div class="panel-heading">
+					<div class="panel-heading" align="center">
 						<strong>工程管理</strong>
 					</div>
 					<div class="panel-body">
@@ -48,9 +53,18 @@
 								<td class="text-center"><strong>操作</strong></td>
 							</tr>
 						</table>
-						<button class="btn btn-danger" id="deleteBtn">
-							<span class="glyphicon glyphicon-trash"></span>&nbsp;删除工程
-						</button>
+						<div class="form-group">
+							<button class="btn btn-danger" id="deleteBtn">
+								<span class="glyphicon glyphicon-trash"></span>&nbsp;删除工程
+							</button>
+							<button class="btn btn-info" onclick="export1()">
+								<span class="glyphicon glyphicon-export"></span>&nbsp;导出
+							</button>
+							<button type="button" class="btn btn-primary" data-toggle="modal"
+								data-target="#uploadModal">
+								<span class="glyphicon glyphicon-import"></span>&nbsp;导入
+							</button>
+						</div>
 						<div id="pageDiv" class="text-right">
 							<ul class="pagination pagination-sm" id="pagecontrol"></ul>
 						</div>
@@ -68,7 +82,7 @@
 		</div>
 	</div>
 	<div class="modal" id="projectInfo">
-		<div class="modal-dialog" style="width : 800px;">
+		<div class="modal-dialog" style="width: 800px;">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button class="close" data-dismiss="modal">&times;</button>
@@ -77,7 +91,9 @@
 				<div class="modal-body">
 					<form class="form-horizontal" id="myform" method="post">
 						<fieldset>
-							<legend><lable><span class="glyphicon glyphicon-file"></span>修改数据</lable></legend>
+							<legend>
+								<lable> <span class="glyphicon glyphicon-file"></span>修改数据</lable>
+							</legend>
 							<div class="form-group" id="sidDiv">
 								<lable class="col-md-3 control-lable" for="sid">项目编号:</lable>
 								<div class="col-md-5">
@@ -88,44 +104,75 @@
 							<div class="form-group" id="nameDiv">
 								<lable class="col-md-3 control-lable" for="name">项目名称:</lable>
 								<div class="col-md-5">
-									<input type="text" name="name" id="name" class="form-control" placeholder="请输入项目名称">
+									<input type="text" name="name" id="name" class="form-control"
+										placeholder="请输入项目名称">
 								</div>
 								<div class="col-md-4" id="nameSpan"></div>
 							</div>
 							<div class="form-group" id="frNameDiv">
 								<lable class="col-md-3 control-lable" for="frName">法人姓名:</lable>
 								<div class="col-md-5">
-									<input type="text" name="frName" id="frName" class="form-control" placeholder="请输入法人姓名">
+									<input type="text" name="frName" id="frName"
+										class="form-control" placeholder="请输入法人姓名">
 								</div>
 								<div class="col-md-4" id="frNameSpan"></div>
 							</div>
 							<div class="form-group" id="telDiv">
 								<lable class="col-md-3 control-lable" for="tel">联系电话:</lable>
 								<div class="col-md-5">
-									<input type="text" name="tel" id="tel" class="form-control" placeholder="请输入联系电话">
+									<input type="text" name="tel" id="tel" class="form-control"
+										placeholder="请输入联系电话">
 								</div>
 								<div class="col-md-4" id="telSpan"></div>
 							</div>
 							<div class="form-group" id="addressDiv">
 								<lable class="col-md-3 control-lable" for="address">工程地址:</lable>
 								<div class="col-md-5">
-									<input type="text" name="address" id="address" class="form-control" placeholder="请输入工程地址">
+									<input type="text" name="address" id="address"
+										class="form-control" placeholder="请输入工程地址">
 								</div>
 								<div class="col-md-4" id="addressSpan"></div>
 							</div>
 							<div class="form-group">
 								<div class="col-md-5 col-md-offset-3">
-									<button type="button" class="btn btn-primary btn-sm" id="updateBtn">修改工程信息</button>
+									<button type="button" class="btn btn-primary btn-sm"
+										id="updateBtn">修改工程信息</button>
 								</div>
 							</div>
 						</fieldset>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-success btn-sm" data-dismiss="modal">关闭编辑界面</button>
+					<button type="button" class="btn btn-success btn-sm"
+						data-dismiss="modal">关闭编辑界面</button>
 				</div>
 			</div>
 		</div>
-	</div>		
+	</div>
+	<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" style="width: 400px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">批量导入数据</h4>
+				</div>
+				<div class="modal-body">
+					<form action="pages/project/ProjectServlet/importExcel" method="post" enctype="multipart/form-data">
+						<input type="file" name="ExcelFile" id="ExcelFile">
+						<button type="submit" class="btn btn-sm btn-info"
+							style="margin-top:7px">
+							<span class="glyphicon glyphicon-open"></span>&nbsp;上传
+						</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

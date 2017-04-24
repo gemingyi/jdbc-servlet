@@ -1,6 +1,6 @@
 package com.gmy.service;
 
-import java.util.List;
+import java.sql.ResultSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,5 +15,7 @@ public interface IProjectService {
 	public boolean delete(Set<Integer> ids) throws Exception;
 	
 	public Map<String,Object> list(int currentPage,int lineSize) throws Exception;
+	
+	public ResultSet exportExcel() throws Exception;
 	
 }
